@@ -1,0 +1,91 @@
+<html>
+<head>
+  <title>Vocal Warm Up Js</title>
+  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@^2/webcomponents-bundle.js"></script>
+  <script src="https://unpkg.com/tone"></script>
+  <script src="https://unpkg.com/@tonejs/ui"></script>
+  <!-- development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+  <div id="app">
+    <h1>Vocal Warm Up Js</h1>
+
+    <div class="controls">
+      <button aria-label="Play" @click="playPause">
+        <template v-if="isPlaying">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"></path><path d="M6 6h12v12H6z"></path></svg>
+        </template>
+        <template v-else>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg>
+        </template>
+      </button>
+      
+      <div>
+        <input
+          type="range" class="slider" id="transpose-slider" name="transpose"
+          min="-12" :max="24"
+          v-model="transpose"
+          v-on:change="transposeSliderChange">
+        <label for="transpose">transpose {{ transpose }} half tones</label>
+      </div>
+
+      <div>
+        <input
+          type="range" class="slider" id="bpm-slider" name="bpm"
+          min="30" :max="250"
+          v-model="bpm"
+          v-on:change="bpmSliderChange">
+        <label for="bpm">{{ bpm }} bpm</label>
+      </div>
+
+      <div class="active-note">
+        {{ notePlaying }}
+      </div>
+    </div>
+
+    <tone-demo class="tone-demo">
+    </tone-demo>
+
+    {{ notes }}
+  </div>
+
+  <style>
+    #bpm {
+      display: inline;
+    }
+
+    .tone-demo {
+      width: 50%;
+      height: 50%;
+      position: relative;
+      display: block;
+    }
+
+    .slider {
+      width: 25em;
+    }
+
+    button {
+      display: block;
+      width: 10em;
+    }
+  </style>
+
+  <script src="main.js"></script>
+
+  <!-- Google Analytics -->
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    try {
+      var pageTracker = _gat._getTracker("UA-4533496-22");
+    pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
+  
+</body>
+</html>
